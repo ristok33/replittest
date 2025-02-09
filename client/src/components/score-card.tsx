@@ -202,15 +202,29 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
           <div className="space-y-2 text-sm">
             <div className="grid grid-cols-2 p-3 border-b border-gray-100">
               <span className="font-medium text-gray-600">KYC Check</span>
-              <span className="font-semibold text-black text-right">
-                {score.verification.kycComplete ? "Done" : "Not Done"}
-              </span>
+              <div className="flex items-center justify-end gap-2">
+                <span className="font-semibold text-black">
+                  {score.verification.kycComplete ? "Done" : "Not Done"}
+                </span>
+                {!score.verification.kycComplete && (
+                  <Button variant="outline" size="sm" className="h-7 px-2 text-xs">
+                    Add
+                  </Button>
+                )}
+              </div>
             </div>
             <div className="grid grid-cols-2 p-3 border-b border-gray-100">
               <span className="font-medium text-gray-600">Employer Data</span>
-              <span className="font-semibold text-black text-right">
-                {score.verification.employerDataComplete ? "Done" : "Not Done"}
-              </span>
+              <div className="flex items-center justify-end gap-2">
+                <span className="font-semibold text-black">
+                  {score.verification.employerDataComplete ? "Done" : "Not Done"}
+                </span>
+                {!score.verification.employerDataComplete && (
+                  <Button variant="outline" size="sm" className="h-7 px-2 text-xs">
+                    Add
+                  </Button>
+                )}
+              </div>
             </div>
             <div className="grid grid-cols-2 p-3 border-b border-gray-100">
               <span className="font-medium text-gray-600">Guarantor</span>
