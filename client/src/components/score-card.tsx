@@ -34,11 +34,11 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
     for (let i = 1; i <= 5; i++) {
       if (i <= fullStars) {
-        stars.push(<FaStar key={i} className="text-yellow-400 w-8 h-8" />)
+        stars.push(<FaStar key={i} className="text-black w-8 h-8" />)
       } else if (i === fullStars + 1 && hasHalfStar) {
-        stars.push(<FaStarHalf key={i} className="text-yellow-400 w-8 h-8" />)
+        stars.push(<FaStarHalf key={i} className="text-black w-8 h-8" />)
       } else {
-        stars.push(<FaRegStar key={i} className="text-yellow-400 w-8 h-8" />)
+        stars.push(<FaRegStar key={i} className="text-black w-8 h-8" />)
       }
     }
     return stars
@@ -46,9 +46,9 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
   if (compact) {
     return (
-      <Card className="bg-gradient-to-br from-white to-gray-50">
+      <Card className="bg-white">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+          <CardTitle className="text-2xl font-bold text-black">
             Tenant Score
           </CardTitle>
           <div className="flex">
@@ -56,7 +56,7 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
           </div>
         </CardHeader>
         <CardContent>
-          <Button asChild className="w-full mt-4 bg-gradient-to-r from-gray-900 to-gray-600 hover:from-gray-800 hover:to-gray-500">
+          <Button asChild className="w-full mt-4 bg-black text-white hover:bg-gray-900">
             <Link href="/score">View Details <ChevronRight className="ml-2 h-4 w-4" /></Link>
           </Button>
         </CardContent>
@@ -65,9 +65,9 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
   }
 
   return (
-    <Card className="w-full bg-gradient-to-br from-white to-gray-50">
+    <Card className="w-full bg-white">
       <CardHeader>
-        <CardTitle className="text-3xl font-bold text-center bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+        <CardTitle className="text-3xl font-bold text-center text-black">
           Your Tenant Score
         </CardTitle>
       </CardHeader>
@@ -77,27 +77,27 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
         </div>
 
         {/* Financial Details Section */}
-        <Card className="border shadow-sm bg-white/50 backdrop-blur-sm">
+        <Card className="border border-gray-200 shadow-sm bg-white">
           <CardHeader>
-            <CardTitle className="text-xl text-gray-800">Financial Overview</CardTitle>
+            <CardTitle className="text-xl text-black">Financial Overview</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-6">
-              <div className="p-4 rounded-lg bg-white/80 backdrop-blur-sm">
-                <p className="text-sm font-medium text-gray-500">Monthly Income</p>
-                <p className="text-2xl font-semibold text-gray-900">{formatCurrency(score.finances.monthlyIncome)}</p>
+              <div className="p-4 rounded-lg border border-gray-100">
+                <p className="text-sm font-medium text-gray-600">Monthly Income</p>
+                <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.monthlyIncome)}</p>
               </div>
-              <div className="p-4 rounded-lg bg-white/80 backdrop-blur-sm">
-                <p className="text-sm font-medium text-gray-500">Monthly Expenses</p>
-                <p className="text-2xl font-semibold text-gray-900">{formatCurrency(score.finances.monthlyExpenses)}</p>
+              <div className="p-4 rounded-lg border border-gray-100">
+                <p className="text-sm font-medium text-gray-600">Monthly Expenses</p>
+                <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.monthlyExpenses)}</p>
               </div>
-              <div className="p-4 rounded-lg bg-white/80 backdrop-blur-sm">
-                <p className="text-sm font-medium text-gray-500">Current Balance</p>
-                <p className="text-2xl font-semibold text-gray-900">{formatCurrency(score.finances.currentBalance)}</p>
+              <div className="p-4 rounded-lg border border-gray-100">
+                <p className="text-sm font-medium text-gray-600">Current Balance</p>
+                <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.currentBalance)}</p>
               </div>
-              <div className="p-4 rounded-lg bg-white/80 backdrop-blur-sm">
-                <p className="text-sm font-medium text-gray-500">Maximum Rent (40%)</p>
-                <p className="text-2xl font-semibold text-gray-900">{formatCurrency(score.finances.maxRent)}</p>
+              <div className="p-4 rounded-lg border border-gray-100">
+                <p className="text-sm font-medium text-gray-600">Maximum Rent (40%)</p>
+                <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.maxRent)}</p>
               </div>
             </div>
           </CardContent>
@@ -106,7 +106,7 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
         {!score.applicationComplete && (
           <Button 
             asChild 
-            className="w-full bg-gradient-to-r from-gray-900 to-gray-600 hover:from-gray-800 hover:to-gray-500"
+            className="w-full bg-black text-white hover:bg-gray-900"
           >
             <Link href="/apply">Complete Application</Link>
           </Button>
