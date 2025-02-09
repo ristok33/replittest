@@ -42,11 +42,11 @@ interface ScoreCardProps {
       canUpdate: boolean
       guarantor: {
         name: string | null;
-        status: string;  // Remove null type
+        status: string;
       };
       coTenant: {
         name: string | null;
-        status: string;  // Remove null type
+        status: string;
       };
     }
   }
@@ -69,11 +69,11 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
     for (let i = 1; i <= 5; i++) {
       if (i <= fullStars) {
-        stars.push(<FaStar key={i} className="text-black w-8 h-8" />)
+        stars.push(<FaStar key={i} className="text-black md:w-8 md:h-8 w-6 h-6" />)
       } else if (i === fullStars + 1 && hasHalfStar) {
-        stars.push(<FaStarHalf key={i} className="text-black w-8 h-8" />)
+        stars.push(<FaStarHalf key={i} className="text-black md:w-8 md:h-8 w-6 h-6" />)
       } else {
-        stars.push(<FaRegStar key={i} className="text-black w-8 h-8" />)
+        stars.push(<FaRegStar key={i} className="text-black md:w-8 md:h-8 w-6 h-6" />)
       }
     }
     return stars
@@ -106,139 +106,125 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
   return (
     <Card className="w-full bg-white">
-      <CardHeader>
-        <CardTitle className="text-3xl font-bold text-center text-black">
+      <CardHeader className="pb-4">
+        <CardTitle className="text-2xl md:text-3xl font-bold text-center text-black">
           Your Tenant Score
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-8">
+      <CardContent className="space-y-4">
         <div className="flex justify-center space-x-1">
           {renderStars(score.overall)}
         </div>
 
         {/* Profile Section */}
-        <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader>
-            <CardTitle className="text-xl text-black">Tenant Profile</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center p-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-600">Name</span>
-                <span className="text-sm font-semibold text-black">{score.profile.name}</span>
-              </div>
-              <div className="flex justify-between items-center p-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-600">Email</span>
-                <span className="text-sm font-semibold text-black">{score.profile.email}</span>
-              </div>
-              <div className="flex justify-between items-center p-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-600">Phone</span>
-                <span className="text-sm font-semibold text-black">{score.profile.phone}</span>
-              </div>
-              <div className="flex justify-between items-center p-4">
-                <span className="text-sm font-medium text-gray-600">Occupation</span>
-                <span className="text-sm font-semibold text-black">{score.profile.occupation}</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="space-y-2 text-sm">
+          <div className="grid grid-cols-2 p-3 border-b border-gray-100">
+            <span className="font-medium text-gray-600">Name</span>
+            <span className="font-semibold text-black text-right">{score.profile.name}</span>
+          </div>
+          <div className="grid grid-cols-2 p-3 border-b border-gray-100">
+            <span className="font-medium text-gray-600">Email</span>
+            <span className="font-semibold text-black text-right">{score.profile.email}</span>
+          </div>
+          <div className="grid grid-cols-2 p-3 border-b border-gray-100">
+            <span className="font-medium text-gray-600">Phone</span>
+            <span className="font-semibold text-black text-right">{score.profile.phone}</span>
+          </div>
+          <div className="grid grid-cols-2 p-3">
+            <span className="font-medium text-gray-600">Occupation</span>
+            <span className="font-semibold text-black text-right">{score.profile.occupation}</span>
+          </div>
+        </div>
 
         {/* Financial Details Section */}
-        <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader>
-            <CardTitle className="text-xl text-black">Financial Overview</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-6">
-              <div className="p-4 rounded-lg border border-gray-100">
-                <p className="text-sm font-medium text-gray-600">Monthly Income</p>
-                <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.monthlyIncome)}</p>
-              </div>
-              <div className="p-4 rounded-lg border border-gray-100">
-                <p className="text-sm font-medium text-gray-600">Monthly Expenses</p>
-                <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.monthlyExpenses)}</p>
-              </div>
-              <div className="p-4 rounded-lg border border-gray-100">
-                <p className="text-sm font-medium text-gray-600">Current Balance</p>
-                <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.currentBalance)}</p>
-              </div>
-              <div className="p-4 rounded-lg border border-gray-100">
-                <p className="text-sm font-medium text-gray-600">Maximum Rent (40%)</p>
-                <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.maxRent)}</p>
-              </div>
+        <div className="mt-4">
+          <h3 className="font-semibold text-lg mb-3">Financial Overview</h3>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="p-3 rounded-lg border border-gray-100">
+              <p className="text-xs font-medium text-gray-600">Monthly Income</p>
+              <p className="text-lg font-semibold text-black">{formatCurrency(score.finances.monthlyIncome)}</p>
             </div>
+            <div className="p-3 rounded-lg border border-gray-100">
+              <p className="text-xs font-medium text-gray-600">Monthly Expenses</p>
+              <p className="text-lg font-semibold text-black">{formatCurrency(score.finances.monthlyExpenses)}</p>
+            </div>
+            <div className="p-3 rounded-lg border border-gray-100">
+              <p className="text-xs font-medium text-gray-600">Current Balance</p>
+              <p className="text-lg font-semibold text-black">{formatCurrency(score.finances.currentBalance)}</p>
+            </div>
+            <div className="p-3 rounded-lg border border-gray-100">
+              <p className="text-xs font-medium text-gray-600">Maximum Rent</p>
+              <p className="text-lg font-semibold text-black">{formatCurrency(score.finances.maxRent)}</p>
+            </div>
+          </div>
 
-            {/* Bank Statements Section */}
-            <div className="mt-6 p-4 rounded-lg border border-gray-200">
-              <div className="flex justify-between items-center">
-                <div>
-                  <h4 className="font-medium text-black">Bank Statements</h4>
-                  <p className="text-sm text-gray-600">
-                    {score.finances.bankStatements.uploaded
-                      ? `Last updated: ${formatDate(score.finances.bankStatements.lastUpdated!)} (${score.finances.bankStatements.months} months of history)`
-                      : 'No bank statements uploaded yet'}
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  onClick={handleBankStatementUpload}
-                  className="flex items-center space-x-2"
-                >
-                  <Upload className="h-4 w-4" />
-                  <span>{score.finances.bankStatements.uploaded ? 'Update' : 'Upload'}</span>
-                </Button>
+          {/* Bank Statements Section */}
+          <div className="mt-4 p-3 rounded-lg border border-gray-200">
+            <div className="flex justify-between items-center">
+              <div>
+                <h4 className="text-sm font-medium text-black">Bank Statements</h4>
+                <p className="text-xs text-gray-600">
+                  {score.finances.bankStatements.uploaded
+                    ? `Last updated: ${formatDate(score.finances.bankStatements.lastUpdated!)} (${score.finances.bankStatements.months} months)`
+                    : 'No bank statements uploaded yet'}
+                </p>
               </div>
+              <Button
+                variant="outline"
+                onClick={handleBankStatementUpload}
+                size="sm"
+                className="text-xs"
+              >
+                <Upload className="h-3 w-3 mr-1" />
+                {score.finances.bankStatements.uploaded ? 'Update' : 'Upload'}
+              </Button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Other Details Section */}
-        <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader>
-            <CardTitle className="text-xl text-black">Other Details</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center p-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-600">KYC Check</span>
-                <span className="text-sm font-semibold text-black">
-                  {score.verification.kycComplete ? "Done" : "Not Done"}
-                </span>
-              </div>
-              <div className="flex justify-between items-center p-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-600">Employer Data</span>
-                <span className="text-sm font-semibold text-black">
-                  {score.verification.employerDataComplete ? "Done" : "Not Done"}
-                </span>
-              </div>
-              <div className="flex justify-between items-center p-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-600">Previous CasaPay Rentals</span>
-                <span className="text-sm font-semibold text-black">
-                  {score.verification.previousRentals}
-                </span>
-              </div>
-              <div className="flex justify-between items-center p-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-600">Guarantor</span>
-                <span className="text-sm font-semibold text-black">
-                  {score.verification.guarantor.name || 'Not Added'}
-                  {score.verification.guarantor.name && ` (${score.verification.guarantor.status})`}
-                </span>
-              </div>
-              <div className="flex justify-between items-center p-4">
-                <span className="text-sm font-medium text-gray-600">Co-tenant</span>
-                <span className="text-sm font-semibold text-black">
-                  {score.verification.coTenant.name || 'Not Added'}
-                  {score.verification.coTenant.name && ` (${score.verification.coTenant.status})`}
-                </span>
-              </div>
+        <div className="mt-4">
+          <h3 className="font-semibold text-lg mb-3">Other Details</h3>
+          <div className="space-y-2 text-sm">
+            <div className="grid grid-cols-2 p-3 border-b border-gray-100">
+              <span className="font-medium text-gray-600">KYC Check</span>
+              <span className="font-semibold text-black text-right">
+                {score.verification.kycComplete ? "Done" : "Not Done"}
+              </span>
             </div>
-          </CardContent>
-        </Card>
+            <div className="grid grid-cols-2 p-3 border-b border-gray-100">
+              <span className="font-medium text-gray-600">Employer Data</span>
+              <span className="font-semibold text-black text-right">
+                {score.verification.employerDataComplete ? "Done" : "Not Done"}
+              </span>
+            </div>
+            <div className="grid grid-cols-2 p-3 border-b border-gray-100">
+              <span className="font-medium text-gray-600">Previous Rentals</span>
+              <span className="font-semibold text-black text-right">
+                {score.verification.previousRentals}
+              </span>
+            </div>
+            <div className="grid grid-cols-2 p-3 border-b border-gray-100">
+              <span className="font-medium text-gray-600">Guarantor</span>
+              <span className="font-semibold text-black text-right">
+                {score.verification.guarantor.name || 'Not Added'}
+                {score.verification.guarantor.name && ` (${score.verification.guarantor.status})`}
+              </span>
+            </div>
+            <div className="grid grid-cols-2 p-3">
+              <span className="font-medium text-gray-600">Co-tenant</span>
+              <span className="font-semibold text-black text-right">
+                {score.verification.coTenant.name || 'Not Added'}
+                {score.verification.coTenant.name && ` (${score.verification.coTenant.status})`}
+              </span>
+            </div>
+          </div>
+        </div>
 
         {!score.applicationComplete && (
           <Button
             asChild
-            className="w-full bg-black text-white hover:bg-gray-900"
+            className="w-full bg-black text-white hover:bg-gray-900 mt-4"
           >
             <Link href="/apply">Complete Application</Link>
           </Button>
