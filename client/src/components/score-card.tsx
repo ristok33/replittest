@@ -53,6 +53,10 @@ interface ScoreCardProps {
   compact?: boolean
 }
 
+const formatScore = (score: number) => {
+  return score.toFixed(2)
+}
+
 export function ScoreCard({ score, compact = false }: ScoreCardProps) {
   const formatCurrency = (amount: number) => {
     return `${amount.toLocaleString('de-DE')}€`
@@ -91,8 +95,13 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
           <CardTitle className="text-2xl font-bold text-black">
             Tenant Score
           </CardTitle>
-          <div className="flex">
-            {renderStars(score.overall)}
+          <div className="flex flex-col items-end">
+            <div className="flex">
+              {renderStars(score.overall)}
+            </div>
+            <span className="text-sm text-gray-600 mt-1">
+              {formatScore(score.overall)} / 5.00
+            </span>
           </div>
         </CardHeader>
         <CardContent>
@@ -112,8 +121,13 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="flex justify-center space-x-1">
-          {renderStars(score.overall)}
+        <div className="flex flex-col items-center space-y-2">
+          <div className="flex space-x-1">
+            {renderStars(score.overall)}
+          </div>
+          <span className="text-lg text-gray-600">
+            {formatScore(score.overall)} / 5.00
+          </span>
         </div>
 
         {/* Profile Section */}
