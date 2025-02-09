@@ -9,6 +9,7 @@ import DashboardPage from "@/pages/dashboard";
 import ScorePage from "@/pages/score";
 import ApplyPage from "@/pages/apply";
 import SharePage from "@/pages/share";
+import ProfilePage from "@/pages/profile";
 
 function Router() {
   return (
@@ -19,6 +20,7 @@ function Router() {
         <Route path="/score" component={ScorePage} />
         <Route path="/apply" component={ApplyPage} />
         <Route path="/share" component={SharePage} />
+        <Route path="/profile" component={ProfilePage} />
         <Route component={NotFound} />
       </Switch>
       <MobileNav />
