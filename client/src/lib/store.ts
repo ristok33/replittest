@@ -39,6 +39,14 @@ interface Score {
     kycComplete: boolean
     employerDataComplete: boolean
     previousRentals: number
+    guarantor: {
+      name: string | null
+      status: string
+    }
+    coTenant: {
+      name: string | null
+      status: string
+    }
     lastUpdated: string
     canUpdate: boolean
   }

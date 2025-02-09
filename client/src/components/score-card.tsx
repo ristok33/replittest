@@ -40,6 +40,14 @@ interface ScoreCardProps {
       previousRentals: number
       lastUpdated: string
       canUpdate: boolean
+      guarantor: {
+        name: string | null;
+        status: string;  // Remove null type
+      };
+      coTenant: {
+        name: string | null;
+        status: string;  // Remove null type
+      };
     }
   }
   compact?: boolean
@@ -166,7 +174,7 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
                 <div>
                   <h4 className="font-medium text-black">Bank Statements</h4>
                   <p className="text-sm text-gray-600">
-                    {score.finances.bankStatements.uploaded 
+                    {score.finances.bankStatements.uploaded
                       ? `Last updated: ${formatDate(score.finances.bankStatements.lastUpdated!)} (${score.finances.bankStatements.months} months of history)`
                       : 'No bank statements uploaded yet'}
                   </p>
@@ -203,10 +211,24 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
                   {score.verification.employerDataComplete ? "Done" : "Not Done"}
                 </span>
               </div>
-              <div className="flex justify-between items-center p-4">
+              <div className="flex justify-between items-center p-4 border-b border-gray-100">
                 <span className="text-sm font-medium text-gray-600">Previous CasaPay Rentals</span>
                 <span className="text-sm font-semibold text-black">
                   {score.verification.previousRentals}
+                </span>
+              </div>
+              <div className="flex justify-between items-center p-4 border-b border-gray-100">
+                <span className="text-sm font-medium text-gray-600">Guarantor</span>
+                <span className="text-sm font-semibold text-black">
+                  {score.verification.guarantor.name || 'Not Added'}
+                  {score.verification.guarantor.name && ` (${score.verification.guarantor.status})`}
+                </span>
+              </div>
+              <div className="flex justify-between items-center p-4">
+                <span className="text-sm font-medium text-gray-600">Co-tenant</span>
+                <span className="text-sm font-semibold text-black">
+                  {score.verification.coTenant.name || 'Not Added'}
+                  {score.verification.coTenant.name && ` (${score.verification.coTenant.status})`}
                 </span>
               </div>
             </div>
@@ -214,8 +236,8 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
         </Card>
 
         {!score.applicationComplete && (
-          <Button 
-            asChild 
+          <Button
+            asChild
             className="w-full bg-black text-white hover:bg-gray-900"
           >
             <Link href="/apply">Complete Application</Link>

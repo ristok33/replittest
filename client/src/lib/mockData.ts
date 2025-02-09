@@ -31,6 +31,14 @@ export const mockScoreData = {
       kycComplete: false,
       employerDataComplete: false,
       previousRentals: 0,
+      guarantor: {
+        name: null,
+        status: 'Not Added'
+      },
+      coTenant: {
+        name: null,
+        status: 'Not Added'
+      },
       lastUpdated: '2024-02-09',
       canUpdate: true
     }
@@ -67,6 +75,14 @@ export const mockScoreData = {
       kycComplete: true,
       employerDataComplete: true,
       previousRentals: 2,
+      guarantor: {
+        name: 'Jane Smith',
+        status: 'Verified'
+      },
+      coTenant: {
+        name: 'Alex Johnson',
+        status: 'Verified'
+      },
       lastUpdated: '2024-02-09',
       canUpdate: true
     }
