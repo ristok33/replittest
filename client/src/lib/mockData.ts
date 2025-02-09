@@ -6,6 +6,12 @@ export const mockScoreData = {
     history: 3.5,
     employment: 3.2,
     applicationComplete: false,
+    finances: {
+      monthlyIncome: 1200,
+      monthlyExpenses: 333,
+      currentBalance: 2304,
+      maxRent: 480, // 40% of income
+    }
   },
   improved: {
     overall: 4.50,
@@ -14,6 +20,12 @@ export const mockScoreData = {
     history: 4.5,
     employment: 4.3,
     applicationComplete: true,
+    finances: {
+      monthlyIncome: 2000,
+      monthlyExpenses: 500,
+      currentBalance: 5000,
+      maxRent: 800, // 40% of income
+    }
   },
 }
 

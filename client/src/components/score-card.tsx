@@ -12,6 +12,12 @@ interface ScoreCardProps {
     history: number
     employment: number
     applicationComplete: boolean
+    finances: {
+      monthlyIncome: number
+      monthlyExpenses: number
+      currentBalance: number
+      maxRent: number
+    }
   }
   compact?: boolean
 }
@@ -25,6 +31,10 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
   // Convert 1-5 scale to percentage for progress bar
   const toPercentage = (value: number) => ((value - 1) / 4) * 100
+
+  const formatCurrency = (amount: number) => {
+    return `${amount.toLocaleString('de-DE')}€`
+  }
 
   if (compact) {
     return (
@@ -55,6 +65,33 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
             {score.overall.toFixed(2)}
           </span>
         </div>
+
+        {/* Financial Details Section */}
+        <Card className="border-2">
+          <CardHeader>
+            <CardTitle className="text-xl">Financial Overview</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-sm text-muted-foreground">Monthly Income</p>
+                <p className="text-lg font-semibold">{formatCurrency(score.finances.monthlyIncome)}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Monthly Expenses</p>
+                <p className="text-lg font-semibold">{formatCurrency(score.finances.monthlyExpenses)}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Current Balance</p>
+                <p className="text-lg font-semibold">{formatCurrency(score.finances.currentBalance)}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Maximum Rent (40%)</p>
+                <p className="text-lg font-semibold">{formatCurrency(score.finances.maxRent)}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="space-y-4">
           <div className="space-y-2">
