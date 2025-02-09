@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Home, Star, User } from "lucide-react";
+import { Home, Star, User, CreditCard, Gift } from "lucide-react";
 import { useStore } from "@/lib/store";
 
 export function MobileNav() {
@@ -28,6 +28,22 @@ export function MobileNav() {
           />
           <span className={`text-xs mt-1 ${location === '/score' ? 'text-black' : 'text-gray-500'}`}>
             Score
+          </span>
+        </Link>
+        <Link href="/payments" className="flex flex-col items-center p-2">
+          <CreditCard 
+            className={`h-6 w-6 ${location === '/payments' ? 'text-black' : 'text-gray-500'}`} 
+          />
+          <span className={`text-xs mt-1 ${location === '/payments' ? 'text-black' : 'text-gray-500'}`}>
+            Pay
+          </span>
+        </Link>
+        <Link href="/offers" className="flex flex-col items-center p-2">
+          <Gift 
+            className={`h-6 w-6 ${location === '/offers' ? 'text-black' : 'text-gray-500'}`} 
+          />
+          <span className={`text-xs mt-1 ${location === '/offers' ? 'text-black' : 'text-gray-500'}`}>
+            Offers
           </span>
         </Link>
         <Link href="/profile" className="flex flex-col items-center p-2">

@@ -7,6 +7,8 @@ import NotFound from "@/pages/not-found";
 import AuthPage from "@/pages/auth";
 import DashboardPage from "@/pages/dashboard";
 import ScorePage from "@/pages/score";
+import PaymentsPage from "@/pages/payments";
+import OffersPage from "@/pages/offers";
 import ApplyPage from "@/pages/apply";
 import SharePage from "@/pages/share";
 import ProfilePage from "@/pages/profile";
@@ -18,6 +20,8 @@ function Router() {
         <Route path="/" component={AuthPage} />
         <Route path="/dashboard" component={DashboardPage} />
         <Route path="/score" component={ScorePage} />
+        <Route path="/payments" component={PaymentsPage} />
+        <Route path="/offers" component={OffersPage} />
         <Route path="/apply" component={ApplyPage} />
         <Route path="/share" component={SharePage} />
         <Route path="/profile" component={ProfilePage} />
