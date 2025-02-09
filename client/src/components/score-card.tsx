@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ChevronRight, Upload, RefreshCw } from "lucide-react"
+import { ChevronRight, Upload } from "lucide-react"
 import { Link } from "wouter"
 import { FaStar, FaStarHalf, FaRegStar } from "react-icons/fa"
 import { format } from "date-fns"
@@ -71,11 +71,6 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
     return stars
   }
 
-  const handleUpdateSection = (section: string) => {
-    // TODO: Implement section update logic
-    console.log(`Updating section: ${section}`)
-  }
-
   const handleBankStatementUpload = () => {
     // TODO: Implement bank statement upload logic
     console.log('Uploading bank statements')
@@ -115,20 +110,8 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
         {/* Profile Section */}
         <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader className="flex flex-row items-center justify-between">
+          <CardHeader>
             <CardTitle className="text-xl text-black">Tenant Profile</CardTitle>
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
-              <span>Updated: {formatDate(score.profile.lastUpdated)}</span>
-              {score.profile.canUpdate && (
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => handleUpdateSection('profile')}
-                >
-                  <RefreshCw className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -154,20 +137,8 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
         {/* Financial Details Section */}
         <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader className="flex flex-row items-center justify-between">
+          <CardHeader>
             <CardTitle className="text-xl text-black">Financial Overview</CardTitle>
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
-              <span>Updated: {formatDate(score.finances.lastUpdated)}</span>
-              {score.finances.canUpdate && (
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => handleUpdateSection('finances')}
-                >
-                  <RefreshCw className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-6">
@@ -215,20 +186,8 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
         {/* Other Details Section */}
         <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader className="flex flex-row items-center justify-between">
+          <CardHeader>
             <CardTitle className="text-xl text-black">Other Details</CardTitle>
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
-              <span>Updated: {formatDate(score.verification.lastUpdated)}</span>
-              {score.verification.canUpdate && (
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => handleUpdateSection('verification')}
-                >
-                  <RefreshCw className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
