@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, Upload, RefreshCw } from "lucide-react"
 import { Link } from "wouter"
 import { FaStar, FaStarHalf, FaRegStar } from "react-icons/fa"
+import { format } from "date-fns"
 
 interface ScoreCardProps {
   score: {
@@ -17,17 +18,28 @@ interface ScoreCardProps {
       email: string
       phone: string
       occupation: string
+      lastUpdated: string
+      canUpdate: boolean
     }
     finances: {
       monthlyIncome: number
       monthlyExpenses: number
       currentBalance: number
       maxRent: number
+      bankStatements: {
+        uploaded: boolean
+        lastUpdated: string | null
+        months: number
+      }
+      lastUpdated: string
+      canUpdate: boolean
     }
     verification: {
       kycComplete: boolean
       employerDataComplete: boolean
       previousRentals: number
+      lastUpdated: string
+      canUpdate: boolean
     }
   }
   compact?: boolean
@@ -36,6 +48,10 @@ interface ScoreCardProps {
 export function ScoreCard({ score, compact = false }: ScoreCardProps) {
   const formatCurrency = (amount: number) => {
     return `${amount.toLocaleString('de-DE')}€`
+  }
+
+  const formatDate = (date: string) => {
+    return format(new Date(date), 'MMM d, yyyy')
   }
 
   const renderStars = (score: number) => {
@@ -53,6 +69,16 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
       }
     }
     return stars
+  }
+
+  const handleUpdateSection = (section: string) => {
+    // TODO: Implement section update logic
+    console.log(`Updating section: ${section}`)
+  }
+
+  const handleBankStatementUpload = () => {
+    // TODO: Implement bank statement upload logic
+    console.log('Uploading bank statements')
   }
 
   if (compact) {
@@ -89,8 +115,20 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
         {/* Profile Section */}
         <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader>
+          <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-xl text-black">Tenant Profile</CardTitle>
+            <div className="flex items-center space-x-2 text-sm text-gray-500">
+              <span>Updated: {formatDate(score.profile.lastUpdated)}</span>
+              {score.profile.canUpdate && (
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => handleUpdateSection('profile')}
+                >
+                  <RefreshCw className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -116,8 +154,20 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
 
         {/* Financial Details Section */}
         <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader>
+          <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-xl text-black">Financial Overview</CardTitle>
+            <div className="flex items-center space-x-2 text-sm text-gray-500">
+              <span>Updated: {formatDate(score.finances.lastUpdated)}</span>
+              {score.finances.canUpdate && (
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => handleUpdateSection('finances')}
+                >
+                  <RefreshCw className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-6">
@@ -138,13 +188,47 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
                 <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.maxRent)}</p>
               </div>
             </div>
+
+            {/* Bank Statements Section */}
+            <div className="mt-6 p-4 rounded-lg border border-gray-200">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h4 className="font-medium text-black">Bank Statements</h4>
+                  <p className="text-sm text-gray-600">
+                    {score.finances.bankStatements.uploaded 
+                      ? `Last updated: ${formatDate(score.finances.bankStatements.lastUpdated!)} (${score.finances.bankStatements.months} months of history)`
+                      : 'No bank statements uploaded yet'}
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  onClick={handleBankStatementUpload}
+                  className="flex items-center space-x-2"
+                >
+                  <Upload className="h-4 w-4" />
+                  <span>{score.finances.bankStatements.uploaded ? 'Update' : 'Upload'}</span>
+                </Button>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
         {/* Other Details Section */}
         <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader>
+          <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-xl text-black">Other Details</CardTitle>
+            <div className="flex items-center space-x-2 text-sm text-gray-500">
+              <span>Updated: {formatDate(score.verification.lastUpdated)}</span>
+              {score.verification.canUpdate && (
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => handleUpdateSection('verification')}
+                >
+                  <RefreshCw className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
