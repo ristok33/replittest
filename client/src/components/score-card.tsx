@@ -18,6 +18,11 @@ interface ScoreCardProps {
       currentBalance: number
       maxRent: number
     }
+    verification: {
+      kycComplete: boolean
+      employerDataComplete: boolean
+      previousRentals: number
+    }
   }
   compact?: boolean
 }
@@ -98,6 +103,35 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
               <div className="p-4 rounded-lg border border-gray-100">
                 <p className="text-sm font-medium text-gray-600">Maximum Rent (40%)</p>
                 <p className="text-2xl font-semibold text-black">{formatCurrency(score.finances.maxRent)}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Verification Status Section */}
+        <Card className="border border-gray-200 shadow-sm bg-white">
+          <CardHeader>
+            <CardTitle className="text-xl text-black">Verification Status</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center p-4 border-b border-gray-100">
+                <span className="text-sm font-medium text-gray-600">KYC Check</span>
+                <span className="text-sm font-semibold text-black">
+                  {score.verification.kycComplete ? "Done" : "Not Done"}
+                </span>
+              </div>
+              <div className="flex justify-between items-center p-4 border-b border-gray-100">
+                <span className="text-sm font-medium text-gray-600">Employer Data</span>
+                <span className="text-sm font-semibold text-black">
+                  {score.verification.employerDataComplete ? "Done" : "Not Done"}
+                </span>
+              </div>
+              <div className="flex justify-between items-center p-4">
+                <span className="text-sm font-medium text-gray-600">Previous CasaPay Rentals</span>
+                <span className="text-sm font-semibold text-black">
+                  {score.verification.previousRentals}
+                </span>
               </div>
             </div>
           </CardContent>

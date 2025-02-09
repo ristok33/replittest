@@ -11,6 +11,11 @@ export const mockScoreData = {
       monthlyExpenses: 333,
       currentBalance: 2304,
       maxRent: 480, // 40% of income
+    },
+    verification: {
+      kycComplete: false,
+      employerDataComplete: false,
+      previousRentals: 0,
     }
   },
   improved: {
@@ -25,6 +30,11 @@ export const mockScoreData = {
       monthlyExpenses: 500,
       currentBalance: 5000,
       maxRent: 800, // 40% of income
+    },
+    verification: {
+      kycComplete: true,
+      employerDataComplete: true,
+      previousRentals: 2,
     }
   },
 }
