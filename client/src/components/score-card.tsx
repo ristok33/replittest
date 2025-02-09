@@ -213,23 +213,37 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
               </span>
             </div>
             <div className="grid grid-cols-2 p-3 border-b border-gray-100">
+              <span className="font-medium text-gray-600">Guarantor</span>
+              <div className="flex items-center justify-end gap-2">
+                <span className="font-semibold text-black">
+                  {score.verification.guarantor.name || 'Not Added'}
+                  {score.verification.guarantor.name && ` (${score.verification.guarantor.status})`}
+                </span>
+                {!score.verification.guarantor.name && (
+                  <Button variant="outline" size="sm" className="h-7 px-2 text-xs">
+                    Add
+                  </Button>
+                )}
+              </div>
+            </div>
+            <div className="grid grid-cols-2 p-3 border-b border-gray-100">
+              <span className="font-medium text-gray-600">Co-tenant</span>
+              <div className="flex items-center justify-end gap-2">
+                <span className="font-semibold text-black">
+                  {score.verification.coTenant.name || 'Not Added'}
+                  {score.verification.coTenant.name && ` (${score.verification.coTenant.status})`}
+                </span>
+                {!score.verification.coTenant.name && (
+                  <Button variant="outline" size="sm" className="h-7 px-2 text-xs">
+                    Add
+                  </Button>
+                )}
+              </div>
+            </div>
+            <div className="grid grid-cols-2 p-3">
               <span className="font-medium text-gray-600">Previous Rentals</span>
               <span className="font-semibold text-black text-right">
                 {score.verification.previousRentals}
-              </span>
-            </div>
-            <div className="grid grid-cols-2 p-3 border-b border-gray-100">
-              <span className="font-medium text-gray-600">Guarantor</span>
-              <span className="font-semibold text-black text-right">
-                {score.verification.guarantor.name || 'Not Added'}
-                {score.verification.guarantor.name && ` (${score.verification.guarantor.status})`}
-              </span>
-            </div>
-            <div className="grid grid-cols-2 p-3">
-              <span className="font-medium text-gray-600">Co-tenant</span>
-              <span className="font-semibold text-black text-right">
-                {score.verification.coTenant.name || 'Not Added'}
-                {score.verification.coTenant.name && ` (${score.verification.coTenant.status})`}
               </span>
             </div>
           </div>
