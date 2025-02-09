@@ -1,5 +1,6 @@
 import { useStore } from "@/lib/store"
 import { ScoreCard } from "@/components/score-card"
+import { Button } from "@/components/ui/button"
 import { ChevronRight } from "lucide-react"
 import { useLocation, Link } from "wouter"
 import { Card, CardContent } from "@/components/ui/card"

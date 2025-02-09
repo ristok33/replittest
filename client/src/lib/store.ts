@@ -14,6 +14,34 @@ interface Score {
   history: number
   employment: number
   applicationComplete: boolean
+  profile: {
+    name: string
+    email: string
+    phone: string
+    occupation: string
+    lastUpdated: string
+    canUpdate: boolean
+  }
+  finances: {
+    monthlyIncome: number
+    monthlyExpenses: number
+    currentBalance: number
+    maxRent: number
+    bankStatements: {
+      uploaded: boolean
+      lastUpdated: string | null
+      months: number
+    }
+    lastUpdated: string
+    canUpdate: boolean
+  }
+  verification: {
+    kycComplete: boolean
+    employerDataComplete: boolean
+    previousRentals: number
+    lastUpdated: string
+    canUpdate: boolean
+  }
 }
 
 interface AppState {
