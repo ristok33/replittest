@@ -6,6 +6,12 @@ export const mockScoreData = {
     history: 3.5,
     employment: 3.2,
     applicationComplete: false,
+    profile: {
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '+49 123 456789',
+      occupation: 'Software Developer'
+    },
     finances: {
       monthlyIncome: 1200,
       monthlyExpenses: 333,
@@ -25,6 +31,12 @@ export const mockScoreData = {
     history: 4.5,
     employment: 4.3,
     applicationComplete: true,
+    profile: {
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '+49 123 456789',
+      occupation: 'Software Developer'
+    },
     finances: {
       monthlyIncome: 2000,
       monthlyExpenses: 500,

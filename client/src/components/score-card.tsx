@@ -12,6 +12,12 @@ interface ScoreCardProps {
     history: number
     employment: number
     applicationComplete: boolean
+    profile: {
+      name: string
+      email: string
+      phone: string
+      occupation: string
+    }
     finances: {
       monthlyIncome: number
       monthlyExpenses: number
@@ -80,6 +86,33 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
         <div className="flex justify-center space-x-1">
           {renderStars(score.overall)}
         </div>
+
+        {/* Profile Section */}
+        <Card className="border border-gray-200 shadow-sm bg-white">
+          <CardHeader>
+            <CardTitle className="text-xl text-black">Tenant Profile</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center p-4 border-b border-gray-100">
+                <span className="text-sm font-medium text-gray-600">Name</span>
+                <span className="text-sm font-semibold text-black">{score.profile.name}</span>
+              </div>
+              <div className="flex justify-between items-center p-4 border-b border-gray-100">
+                <span className="text-sm font-medium text-gray-600">Email</span>
+                <span className="text-sm font-semibold text-black">{score.profile.email}</span>
+              </div>
+              <div className="flex justify-between items-center p-4 border-b border-gray-100">
+                <span className="text-sm font-medium text-gray-600">Phone</span>
+                <span className="text-sm font-semibold text-black">{score.profile.phone}</span>
+              </div>
+              <div className="flex justify-between items-center p-4">
+                <span className="text-sm font-medium text-gray-600">Occupation</span>
+                <span className="text-sm font-semibold text-black">{score.profile.occupation}</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Financial Details Section */}
         <Card className="border border-gray-200 shadow-sm bg-white">
