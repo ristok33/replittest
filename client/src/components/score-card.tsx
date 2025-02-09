@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronRight } from "lucide-react"
 import { Link } from "wouter"
+import { FaStar, FaStarHalf, FaRegStar } from "react-icons/fa"
 
 interface ScoreCardProps {
   score: {
@@ -26,17 +27,36 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
     return `${amount.toLocaleString('de-DE')}€`
   }
 
+  const renderStars = (score: number) => {
+    const stars = []
+    const fullStars = Math.floor(score)
+    const hasHalfStar = score % 1 >= 0.5
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= fullStars) {
+        stars.push(<FaStar key={i} className="text-yellow-400 w-8 h-8" />)
+      } else if (i === fullStars + 1 && hasHalfStar) {
+        stars.push(<FaStarHalf key={i} className="text-yellow-400 w-8 h-8" />)
+      } else {
+        stars.push(<FaRegStar key={i} className="text-yellow-400 w-8 h-8" />)
+      }
+    }
+    return stars
+  }
+
   if (compact) {
     return (
-      <Card>
+      <Card className="bg-gradient-to-br from-white to-gray-50">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-2xl font-bold">Tenant Score</CardTitle>
-          <div className={`text-2xl font-bold ${score.overall >= 4.0 ? 'text-green-500' : 'text-yellow-500'}`}>
-            {score.overall.toFixed(2)}
+          <CardTitle className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            Tenant Score
+          </CardTitle>
+          <div className="flex">
+            {renderStars(score.overall)}
           </div>
         </CardHeader>
         <CardContent>
-          <Button asChild className="w-full mt-4">
+          <Button asChild className="w-full mt-4 bg-gradient-to-r from-gray-900 to-gray-600 hover:from-gray-800 hover:to-gray-500">
             <Link href="/score">View Details <ChevronRight className="ml-2 h-4 w-4" /></Link>
           </Button>
         </CardContent>
@@ -45,46 +65,49 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
   }
 
   return (
-    <Card className="w-full">
+    <Card className="w-full bg-gradient-to-br from-white to-gray-50">
       <CardHeader>
-        <CardTitle className="text-3xl font-bold">Your Tenant Score</CardTitle>
+        <CardTitle className="text-3xl font-bold text-center bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+          Your Tenant Score
+        </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="text-center">
-          <span className={`text-6xl font-bold ${score.overall >= 4.0 ? 'text-green-500' : 'text-yellow-500'}`}>
-            {score.overall.toFixed(2)}
-          </span>
+      <CardContent className="space-y-8">
+        <div className="flex justify-center space-x-1">
+          {renderStars(score.overall)}
         </div>
 
         {/* Financial Details Section */}
-        <Card className="border-2">
+        <Card className="border shadow-sm bg-white/50 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-xl">Financial Overview</CardTitle>
+            <CardTitle className="text-xl text-gray-800">Financial Overview</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="text-sm text-muted-foreground">Monthly Income</p>
-                <p className="text-lg font-semibold">{formatCurrency(score.finances.monthlyIncome)}</p>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="p-4 rounded-lg bg-white/80 backdrop-blur-sm">
+                <p className="text-sm font-medium text-gray-500">Monthly Income</p>
+                <p className="text-2xl font-semibold text-gray-900">{formatCurrency(score.finances.monthlyIncome)}</p>
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Monthly Expenses</p>
-                <p className="text-lg font-semibold">{formatCurrency(score.finances.monthlyExpenses)}</p>
+              <div className="p-4 rounded-lg bg-white/80 backdrop-blur-sm">
+                <p className="text-sm font-medium text-gray-500">Monthly Expenses</p>
+                <p className="text-2xl font-semibold text-gray-900">{formatCurrency(score.finances.monthlyExpenses)}</p>
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Current Balance</p>
-                <p className="text-lg font-semibold">{formatCurrency(score.finances.currentBalance)}</p>
+              <div className="p-4 rounded-lg bg-white/80 backdrop-blur-sm">
+                <p className="text-sm font-medium text-gray-500">Current Balance</p>
+                <p className="text-2xl font-semibold text-gray-900">{formatCurrency(score.finances.currentBalance)}</p>
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Maximum Rent (40%)</p>
-                <p className="text-lg font-semibold">{formatCurrency(score.finances.maxRent)}</p>
+              <div className="p-4 rounded-lg bg-white/80 backdrop-blur-sm">
+                <p className="text-sm font-medium text-gray-500">Maximum Rent (40%)</p>
+                <p className="text-2xl font-semibold text-gray-900">{formatCurrency(score.finances.maxRent)}</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {!score.applicationComplete && (
-          <Button asChild className="w-full">
+          <Button 
+            asChild 
+            className="w-full bg-gradient-to-r from-gray-900 to-gray-600 hover:from-gray-800 hover:to-gray-500"
+          >
             <Link href="/apply">Complete Application</Link>
           </Button>
         )}
