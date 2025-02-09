@@ -1,8 +1,15 @@
 import { Link, useLocation } from "wouter";
 import { Home, Star, User } from "lucide-react";
+import { useStore } from "@/lib/store";
 
 export function MobileNav() {
   const [location] = useLocation();
+  const { user } = useStore();
+
+  // Don't show nav if user is not logged in or on auth page
+  if (!user || location === '/') {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-0 left-0 right-0 border-t bg-white md:hidden">
