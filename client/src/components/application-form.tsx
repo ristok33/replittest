@@ -21,7 +21,7 @@ export function ApplicationForm() {
   const { toast } = useToast()
   const [, navigate] = useLocation()
   const setScore = useStore((state) => state.setScore)
-  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -102,7 +102,7 @@ export function ApplicationForm() {
             <FormItem>
               <FormLabel>Credit Score</FormLabel>
               <FormControl>
-                <Input placeholder="700" {...field} />
+                <Input placeholder="4.00" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

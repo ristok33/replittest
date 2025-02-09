@@ -18,18 +18,21 @@ interface ScoreCardProps {
 
 export function ScoreCard({ score, compact = false }: ScoreCardProps) {
   const getScoreColor = (value: number) => {
-    if (value >= 80) return "bg-green-500"
-    if (value >= 60) return "bg-yellow-500"
+    if (value >= 4.0) return "bg-green-500"
+    if (value >= 3.0) return "bg-yellow-500"
     return "bg-red-500"
   }
+
+  // Convert 1-5 scale to percentage for progress bar
+  const toPercentage = (value: number) => ((value - 1) / 4) * 100
 
   if (compact) {
     return (
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-2xl font-bold">Tenant Score</CardTitle>
-          <div className={`text-2xl font-bold ${score.overall >= 700 ? 'text-green-500' : 'text-yellow-500'}`}>
-            {score.overall}
+          <div className={`text-2xl font-bold ${score.overall >= 4.0 ? 'text-green-500' : 'text-yellow-500'}`}>
+            {score.overall.toFixed(2)}
           </div>
         </CardHeader>
         <CardContent>
@@ -48,42 +51,42 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="text-center">
-          <span className={`text-6xl font-bold ${score.overall >= 700 ? 'text-green-500' : 'text-yellow-500'}`}>
-            {score.overall}
+          <span className={`text-6xl font-bold ${score.overall >= 4.0 ? 'text-green-500' : 'text-yellow-500'}`}>
+            {score.overall.toFixed(2)}
           </span>
         </div>
-        
+
         <div className="space-y-4">
           <div className="space-y-2">
             <div className="flex justify-between">
               <span className="font-medium">Income Stability</span>
-              <span>{score.income}%</span>
+              <span>{score.income.toFixed(2)}</span>
             </div>
-            <Progress value={score.income} className={getScoreColor(score.income)} />
+            <Progress value={toPercentage(score.income)} className={getScoreColor(score.income)} />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between">
               <span className="font-medium">Credit Score</span>
-              <span>{score.credit}%</span>
+              <span>{score.credit.toFixed(2)}</span>
             </div>
-            <Progress value={score.credit} className={getScoreColor(score.credit)} />
+            <Progress value={toPercentage(score.credit)} className={getScoreColor(score.credit)} />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between">
               <span className="font-medium">Rental History</span>
-              <span>{score.history}%</span>
+              <span>{score.history.toFixed(2)}</span>
             </div>
-            <Progress value={score.history} className={getScoreColor(score.history)} />
+            <Progress value={toPercentage(score.history)} className={getScoreColor(score.history)} />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between">
               <span className="font-medium">Employment</span>
-              <span>{score.employment}%</span>
+              <span>{score.employment.toFixed(2)}</span>
             </div>
-            <Progress value={score.employment} className={getScoreColor(score.employment)} />
+            <Progress value={toPercentage(score.employment)} className={getScoreColor(score.employment)} />
           </div>
         </div>
 

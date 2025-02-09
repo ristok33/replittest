@@ -1,18 +1,18 @@
 export const mockScoreData = {
   initial: {
-    overall: 680,
-    income: 72,
-    credit: 65,
-    history: 85,
-    employment: 78,
+    overall: 3.20,
+    income: 3.1,
+    credit: 2.8,
+    history: 3.5,
+    employment: 3.2,
     applicationComplete: false,
   },
   improved: {
-    overall: 750,
-    income: 85,
-    credit: 78,
-    history: 85,
-    employment: 82,
+    overall: 4.50,
+    income: 4.2,
+    credit: 4.1,
+    history: 4.5,
+    employment: 4.3,
     applicationComplete: true,
   },
 }
