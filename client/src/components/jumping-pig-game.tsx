@@ -94,37 +94,29 @@ export function JumpingPigGame() {
   }
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === 'Space') {
-        if (!isPlaying) {
-          startGame()
-        } else {
-          jump()
-        }
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
     return () => {
-      window.removeEventListener('keydown', handleKeyDown)
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [isPlaying])
+  }, [])
+
+  const handleInteraction = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault() // Prevent double-firing on touch devices
+    if (!isPlaying) {
+      startGame()
+    } else {
+      jump()
+    }
+  }
 
   return (
     <div className="w-full max-w-lg mx-auto">
       <div 
         ref={gameRef}
-        className="relative h-64 bg-gray-100 border-b-2 border-gray-300 overflow-hidden"
-        onClick={() => {
-          if (!isPlaying) {
-            startGame()
-          } else {
-            jump()
-          }
-        }}
+        className="relative h-64 bg-gray-100 border-b-2 border-gray-300 overflow-hidden cursor-pointer"
+        onClick={handleInteraction}
+        onTouchStart={handleInteraction}
       >
         {/* Pig */}
         <div 
@@ -177,7 +169,7 @@ export function JumpingPigGame() {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <h3 className="text-xl font-bold mb-4">Jumping Pig Game</h3>
-              <p className="mb-4 text-sm text-gray-600">Click or press Space to start</p>
+              <p className="mb-4 text-sm text-gray-600">Tap or click to play</p>
             </div>
           </div>
         )}
