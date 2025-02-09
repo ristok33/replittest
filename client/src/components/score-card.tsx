@@ -108,35 +108,6 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
           </CardContent>
         </Card>
 
-        {/* Verification Status Section */}
-        <Card className="border border-gray-200 shadow-sm bg-white">
-          <CardHeader>
-            <CardTitle className="text-xl text-black">Verification Status</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center p-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-600">KYC Check</span>
-                <span className="text-sm font-semibold text-black">
-                  {score.verification.kycComplete ? "Done" : "Not Done"}
-                </span>
-              </div>
-              <div className="flex justify-between items-center p-4 border-b border-gray-100">
-                <span className="text-sm font-medium text-gray-600">Employer Data</span>
-                <span className="text-sm font-semibold text-black">
-                  {score.verification.employerDataComplete ? "Done" : "Not Done"}
-                </span>
-              </div>
-              <div className="flex justify-between items-center p-4">
-                <span className="text-sm font-medium text-gray-600">Previous CasaPay Rentals</span>
-                <span className="text-sm font-semibold text-black">
-                  {score.verification.previousRentals}
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Other Details Section */}
         <Card className="border border-gray-200 shadow-sm bg-white">
           <CardHeader>
