@@ -25,6 +25,7 @@ export function JumpingPigGame() {
   const ricePositionRef = useRef(400)
   const animationFrameRef = useRef<number>()
   const jumpHeightRef = useRef(0)
+  const speedMultiplierRef = useRef(1)
 
   const startGame = () => {
     setIsPlaying(true)
@@ -32,6 +33,7 @@ export function JumpingPigGame() {
     setIsGameOver(false)
     ricePositionRef.current = 400
     setPigY(150)
+    speedMultiplierRef.current = 1
     gameLoop()
   }
 
@@ -45,8 +47,12 @@ export function JumpingPigGame() {
   const gameLoop = () => {
     if (!gameRef.current) return
 
-    // Update rice position
-    ricePositionRef.current -= 5
+    // Calculate speed based on score
+    const baseSpeed = 3
+    speedMultiplierRef.current = 1 + Math.floor(score / 5) * 0.2 // Increase speed by 20% every 5 points
+
+    // Update rice position with increasing speed
+    ricePositionRef.current -= baseSpeed * speedMultiplierRef.current
     if (ricePositionRef.current < -50) {
       ricePositionRef.current = 400
       setScore(s => s + 1)
