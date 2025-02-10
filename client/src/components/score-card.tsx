@@ -83,9 +83,9 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
     return stars
   }
 
-  const handleBankStatementUpload = () => {
-    // TODO: Implement bank statement upload logic
-    console.log('Uploading bank statements')
+  const handleBankStatementAdd = (option: 'open-banking' | 'pdf') => {
+    // TODO: Implement bank statement addition logic
+    console.log('Adding bank statements via:', option)
   }
 
   if (compact) {
@@ -180,18 +180,27 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
                 <p className="text-xs text-gray-600">
                   {score.finances.bankStatements.uploaded
                     ? `Last updated: ${formatDate(score.finances.bankStatements.lastUpdated!)} (${score.finances.bankStatements.months} months)`
-                    : 'No bank statements uploaded yet'}
+                    : 'No bank statements added yet'}
                 </p>
               </div>
-              <Button
-                variant="outline"
-                onClick={handleBankStatementUpload}
-                size="sm"
-                className="text-xs"
-              >
-                <Upload className="h-3 w-3 mr-1" />
-                {score.finances.bankStatements.uploaded ? 'Update' : 'Upload'}
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => handleBankStatementAdd('open-banking')}
+                  size="sm"
+                  className="text-xs"
+                >
+                  Open Banking
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => handleBankStatementAdd('pdf')}
+                  size="sm"
+                  className="text-xs"
+                >
+                  Upload PDF
+                </Button>
+              </div>
             </div>
           </div>
         </div>
