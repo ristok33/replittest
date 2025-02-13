@@ -180,7 +180,7 @@ export function ScoreCard({ score, compact = false }: ScoreCardProps) {
                 <p className="text-xs text-gray-600">
                   {score.finances.bankStatements.uploaded
                     ? `Last updated: ${formatDate(score.finances.bankStatements.lastUpdated!)} (${score.finances.bankStatements.months} months)`
-                    : 'No bank statements added yet'}
+                    : 'Add your statements to improve your score'}
                 </p>
               </div>
               <div className="flex gap-2">

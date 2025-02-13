@@ -47,14 +47,14 @@ export function JumpingPigGame() {
   const gameLoop = () => {
     if (!gameRef.current) return
 
-    // Calculate speed based on score
-    const baseSpeed = 3
-    speedMultiplierRef.current = 1 + Math.floor(score / 5) * 0.2 // Increase speed by 20% every 5 points
+    // Calculate speed based on score with a more gradual increase
+    const baseSpeed = 2 // Slower initial speed
+    speedMultiplierRef.current = 1 + Math.floor(score / 10) * 0.2 // Increase speed every 10 points
 
-    // Update rice position with increasing speed
+    // Update rice position with dynamic speed
     ricePositionRef.current -= baseSpeed * speedMultiplierRef.current
     if (ricePositionRef.current < -50) {
-      ricePositionRef.current = 400
+      ricePositionRef.current = 400 // Reset to right side
       setScore(s => s + 1)
     }
 
@@ -120,7 +120,7 @@ export function JumpingPigGame() {
     <div className="w-full max-w-lg mx-auto">
       <div 
         ref={gameRef}
-        className="relative h-64 bg-gray-100 border-b-2 border-gray-300 overflow-hidden cursor-pointer"
+        className="relative h-64 bg-gray-100 border-b-2 border-gray-300 overflow-hidden cursor-pointer select-none"
         onClick={handleInteraction}
         onTouchStart={handleInteraction}
       >
@@ -175,7 +175,7 @@ export function JumpingPigGame() {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <h3 className="text-xl font-bold mb-4">Jumping Pig Game</h3>
-              <p className="mb-4 text-sm text-gray-600">Tap or click to play</p>
+              <p className="mb-4 text-sm text-gray-600">Tap or click to play and jump</p>
             </div>
           </div>
         )}
